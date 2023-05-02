@@ -51,10 +51,12 @@ const NavBar: React.FC = () => {
             router.pathname === "/dashboard/users" && `${styles.selected}`
           }`}
         >
-          <a className={`ps-4 ${styles.link}`}>
-            <FontAwesomeIcon icon={faUser} className="me-3" />
-            <span>Users</span>
-          </a>
+          <Link href="/dashboard/users" legacyBehavior>
+            <a className={`ps-4 ${styles.link}`}>
+              <FontAwesomeIcon icon={faUser} className="me-3" />
+              <span>Users</span>
+            </a>
+          </Link>
         </li>
         <li className={`mb-2`}>
           <a className={`ps-4 ${styles.link}`}>

@@ -11,8 +11,7 @@ const Auth = ({ children, pageTitle = "" }: Props) => {
   return (
     <>
       <Head>
-        <title>Lendsqr Dashboard {pageTitle}</title>
-        <meta name="description" content={`Lendsqr Dashboard | ${pageTitle}`} />
+        <title>Lendsqr Dashboard | {pageTitle}</title>
       </Head>
       <section className={`d-flex`}>
         <NavBar />

@@ -1,0 +1,26 @@
+$color_1: #030749;
+
+.table {
+	thead {
+		tr {
+			border: none;
+			border-style: none !important;
+		}
+		th {
+			border: none;
+			border-style: none !important;
+		}
+		border: none;
+		border-style: none !important;
+	}
+	th {
+		color: $color_1;
+		font-weight: 500;
+		font-size: 12px;
+	}
+	td {
+		color: $color_1;
+		font-weight: 400;
+		font-size: 0.875rem;
+	}
+}
