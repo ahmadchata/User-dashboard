@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
   const router = useRouter();
 
   return (
-    <nav className={`py-5 ${styles.nav}`}>
+    <nav className={`py-5 bg-white ${styles.nav}`}>
       <div className={`d-flex justify-content-start ps-4`}>
         <Image src="/assets/logo.png" width={145} height={30} alt="logo" />
       </div>

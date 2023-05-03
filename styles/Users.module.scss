@@ -29,8 +29,24 @@ $background-color_1: rgba(57, 205, 98, 0.06);
 	border-radius: 50px;
 }
 .details {
+	position: relative;
 	cursor: pointer;
 	margin-left: 20px;
+	z-index: 1;
+}
+
+.detailsCard {
+	display: flex;
+	color: $color_2;
+	font-size: 14px;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	list-style: none;
+	width: 180px;
+	height: 130px;
+	z-index: 4;
+	background-color: #fff;
 }
 
 

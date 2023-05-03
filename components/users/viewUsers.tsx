@@ -1,9 +1,11 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useCallback } from "react";
 import styles from "/styles/Users.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faClose,
   faCoins,
   faEllipsisVertical,
+  faEye,
   faPager,
   faUser,
   faUsers,
@@ -11,18 +13,43 @@ import {
 import Table from "../layout/Table";
 import axios from "axios";
 import Moment from "react-moment";
+import Link from "next/link";
+
+type User = {
+  orgName: string;
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  createdAt: string;
+};
+
+type Card = {
+  id: number;
+  label: string;
+  color: string;
+  background: string;
+  icon: any;
+  numbers: string;
+};
 
 const Users: React.FC = () => {
-  const [users, setUsers] = useState<any>();
-
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const [users, setUsers] = useState<User[]>();
+  const [loading, setLoading] = useState(true);
+  const [position, setPosition] = useState<{
+    xPos: string;
+    yPos: string;
+    showMenu: boolean;
+  }>({
+    xPos: "0px",
+    yPos: "0px",
+    showMenu: false,
+  });
 
   // Get Users
-  const getUsers = async () => {
+  const getUsers = useCallback(async () => {
+    setLoading(true);
     try {
-      const response = await axios.get(
+      const response = await axios.get<User[]>(
         "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users"
       );
       console.log(response);
@@ -32,11 +59,32 @@ const Users: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+    setLoading(false);
+  }, []);
 
-  const openOptions = (id: number) => {};
+  useEffect(() => {
+    getUsers();
+  }, [getUsers]);
 
-  const cards = useMemo(
+  // Open details menu
+  const openOptions = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setPosition({
+      xPos: `${e.pageX}px`,
+      yPos: `${e.pageY}px`,
+      showMenu: true,
+    });
+  }, []);
+
+  // Close details menu
+  const closeMenu = useCallback(() => {
+    setPosition((prev) => ({
+      ...prev,
+      showMenu: false,
+    }));
+  }, []);
+
+  const cards = useMemo<Card[]>(
     () => [
       {
         id: 1,
@@ -109,30 +157,20 @@ const Users: React.FC = () => {
       },
       {
         Header: "STATUS",
-        accessor: "action",
-        Cell: ({ cell }: any) => {
-          const p = cell.row.original;
+        accessor: "",
+        Cell: () => {
           return (
             <div className="d-flex align-items-center">
-              <a
-                id={p.id}
-                className={`px-3 py-2 ${styles.status}`}
-                onClick={() => openOptions(p.id)}
-              >
-                Active
-              </a>
-
-              <FontAwesomeIcon
-                className={styles.details}
-                icon={faEllipsisVertical}
-                color="#000"
-              />
+              <a className={`px-3 py-2 ${styles.status}`}>Active</a>
+              <div id="menu" onClick={openOptions} className={styles.details}>
+                <FontAwesomeIcon icon={faEllipsisVertical} color="#000" />
+              </div>
             </div>
           );
         },
       },
     ],
-    []
+    [openOptions]
   );
 
   const data = useMemo(() => users, [users]);
@@ -161,7 +199,44 @@ const Users: React.FC = () => {
           </div>
         ))}
       </div>
-      <Table columns={columns} data={data} />
+      {loading ? <p>Loading...</p> : <Table columns={columns} data={data} />}
+
+      {position.showMenu ? (
+        <ul
+          style={{
+            top: position.yPos,
+            left: `calc(${position.xPos} - 150px)`,
+          }}
+          className={`shadow-sm ${styles.detailsCard}`}
+        >
+          <FontAwesomeIcon
+            onClick={closeMenu}
+            icon={faClose}
+            className="me-2"
+            color="#545f7d"
+            style={{
+              position: "absolute",
+              cursor: "pointer",
+              top: "8px",
+              left: "8px",
+            }}
+          />
+          <Link className="text-decoration-none text-muted" href="#">
+            <li>
+              <FontAwesomeIcon icon={faEye} className="me-2" color="#545f7d" />
+              View Details
+            </li>
+          </Link>
+          <li className="my-3">
+            <FontAwesomeIcon icon={faUser} className="me-2" color="#545f7d" />
+            Blacklist User
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faUser} className="me-2" color="#545f7d" />
+            Activate User
+          </li>
+        </ul>
+      ) : null}
     </div>
   );
 };
