@@ -34,7 +34,7 @@ type Card = {
 
 const Users: React.FC = () => {
   const [users, setUsers] = useState<User[]>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [position, setPosition] = useState<{
     xPos: string;
     yPos: string;
@@ -54,7 +54,6 @@ const Users: React.FC = () => {
       const response = await axios.get<User[]>(
         "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users"
       );
-      console.log(response);
       if (response.status === 200) {
         setUsers(response.data);
       }
