@@ -17,7 +17,7 @@ const Auth = ({ children, pageTitle = "" }: Props) => {
         <NavBar />
 
         <main className={`col-10`}>
-          <div className="sticky-top mt-3 ps-5 pe-4">
+          <div className="sticky-top mt-3">
             <TopBar />
           </div>
 

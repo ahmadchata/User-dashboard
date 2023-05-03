@@ -8,22 +8,78 @@ interface Profile {
   firstName: string;
   lastName: string;
   avatar: string;
+  phoneNumber: string;
+  bvn: string;
+  gender: string;
+}
+
+interface Education {
+  level: string;
+  employmentStatus: string;
+  sector: string;
+  duration: string;
+  officeEmail: string;
+  monthlyIncome: Array<string>;
+  loanRepayment: string;
+}
+
+interface Socials {
+  facebook: string;
+  instagram: string;
+  twitter: string;
+}
+
+interface Guarantor {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  address: string;
+  gender: string;
 }
 
 interface User {
   userName: string;
   accountBalance: string;
   profile: Profile;
+  education: Education;
+  socials: Socials;
+  guarantor: Guarantor;
   accountNumber: string;
+  email: string;
 }
 
 const UserDetails: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User>({
-    profile: { firstName: "", lastName: "", avatar: "" },
+    profile: {
+      firstName: "",
+      lastName: "",
+      avatar: "",
+      phoneNumber: "",
+      bvn: "",
+      gender: "",
+    },
+    education: {
+      level: "",
+      employmentStatus: "",
+      sector: "",
+      duration: "",
+      officeEmail: "",
+      monthlyIncome: [],
+      loanRepayment: "",
+    },
+    socials: { facebook: "", instagram: "", twitter: "" },
+    guarantor: {
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      address: "",
+      gender: "",
+    },
     accountBalance: "",
     userName: "",
     accountNumber: "",
+    email: "",
   });
   const router = useRouter();
   const { id } = router.query;

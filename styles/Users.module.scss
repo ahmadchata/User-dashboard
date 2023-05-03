@@ -7,6 +7,10 @@ $color_5: #39CDCC;
 $color_6: #E4033B;
 $background-color_1: rgba(57, 205, 98, 0.06);
 
+.bg {
+	background-color: #fbfbfb;
+}
+
 .h1 {
 	color: $color_1;
 	font-weight: 800;
@@ -80,5 +84,10 @@ $background-color_1: rgba(57, 205, 98, 0.06);
 .navButtonActive {
 	color: $color_5;
 	border-bottom: 2px solid $color_5;
+}
+
+.info {
+	font-size: 16px;
+	color: $color_2;
 }
 /* UserDetials - end */
