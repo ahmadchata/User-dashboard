@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "/styles/Users.module.scss";
 
 type Props = {
   buttons: string[];
@@ -24,12 +25,8 @@ const NavButtons: React.FC<Props> = ({ buttons, submit }) => {
           id={i.toString()}
           name={buttonLabel}
           onClick={(event) => handleClick(event, i)}
-          className={`py-2 px-4 me-3 text-dark bg-white
-            ${
-              i === clickedId
-                ? "border-bottom border-3 border-success"
-                : "nav-item"
-            }
+          className={`me-4 px-4 pb-1 ${styles.navButton}
+            ${i === clickedId && styles.navButtonActive}
           `}
         >
           {buttonLabel}

@@ -3,6 +3,8 @@ $color_1: #15125a;
 $color_2: #545f7d;
 $color_3: #213f7d;
 $color_4: #39cd62;
+$color_5: #39CDCC;
+$color_6: #E4033B;
 $background-color_1: rgba(57, 205, 98, 0.06);
 
 .h1 {
@@ -51,9 +53,32 @@ $background-color_1: rgba(57, 205, 98, 0.06);
 /* User - end */
 
 /* UserDetials - start */
+.blacklistBtn, .activateBtn {
+	text-transform: uppercase;
+	color: $color_6;
+	border: 1px solid $color_6;
+	border-radius: 8px;
+	font-size: 14px;
+}
+.activateBtn {
+	color: $color_5;
+	border: 1px solid $color_5;
+}
 
 .detailsHeading {
 	font-size: 22px;
 	color: $color_3;
+}
+
+.navButton {
+	background-color: #fff;
+	border: none;
+	outline: none;
+	font-size: 14px;
+}
+
+.navButtonActive {
+	color: $color_5;
+	border-bottom: 2px solid $color_5;
 }
 /* UserDetials - end */
