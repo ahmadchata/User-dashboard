@@ -38,10 +38,12 @@ const Users: React.FC = () => {
   const [position, setPosition] = useState<{
     xPos: string;
     yPos: string;
+    id: string;
     showMenu: boolean;
   }>({
     xPos: "0px",
     yPos: "0px",
+    id: "",
     showMenu: false,
   });
 
@@ -67,11 +69,12 @@ const Users: React.FC = () => {
   }, [getUsers]);
 
   // Open details menu
-  const openOptions = useCallback((e: React.MouseEvent) => {
+  const openOptions = useCallback((e: React.MouseEvent, id: string) => {
     e.preventDefault();
     setPosition({
       xPos: `${e.pageX}px`,
       yPos: `${e.pageY}px`,
+      id: id,
       showMenu: true,
     });
   }, []);
@@ -158,11 +161,16 @@ const Users: React.FC = () => {
       {
         Header: "STATUS",
         accessor: "",
-        Cell: () => {
+        Cell: ({ cell }: any) => {
+          const p = cell.row.original;
           return (
             <div className="d-flex align-items-center">
               <a className={`px-3 py-2 ${styles.status}`}>Active</a>
-              <div id="menu" onClick={openOptions} className={styles.details}>
+              <div
+                id="menu"
+                onClick={(e) => openOptions(e, p.id)}
+                className={styles.details}
+              >
                 <FontAwesomeIcon icon={faEllipsisVertical} color="#000" />
               </div>
             </div>
@@ -221,7 +229,13 @@ const Users: React.FC = () => {
               left: "8px",
             }}
           />
-          <Link className="text-decoration-none text-muted" href="#">
+          <Link
+            href={{
+              pathname: "users/[id]",
+              query: { id: position.id },
+            }}
+            className="text-decoration-none text-muted"
+          >
             <li>
               <FontAwesomeIcon icon={faEye} className="me-2" color="#545f7d" />
               View Details
