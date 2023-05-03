@@ -45,9 +45,10 @@ $background-color_1: #39cdcc;
 	width: 100%;
 }
 .searchBar {
-	background: #f8f7f8;
+	background: #fff;
 	color: $color_4;
 	border-radius: 8px;
+	border: 1px solid #213f7d33;
 	&:hover {
 		border: 1px solid #2f12ad;
 		border-radius: 10px;

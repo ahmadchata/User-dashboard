@@ -6,7 +6,7 @@ import styles from "/styles/Dashboard.module.scss";
 const TopBar: React.FC = () => {
   return (
     <header
-      className={`d-flex justify-content-between align-items-center ${styles.topBar}`}
+      className={`d-flex justify-content-between align-items-center ps-5 pe-4 ${styles.topBar}`}
     >
       <div
         className={`col-5 d-flex justify-content-between align-items-center ${styles.searchBar}`}
@@ -14,7 +14,7 @@ const TopBar: React.FC = () => {
         <input
           type="text"
           id="search"
-          className="col-9 ps-3"
+          className="col-9 ps-3 bg-white"
           placeholder="Search for anything"
         />
         <div className={`py-2 px-3 ${styles.glassBg}`}>
