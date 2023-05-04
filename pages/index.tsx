@@ -131,12 +131,14 @@ export default function Home() {
                   FORGOT PASSWORD?
                 </Link>
               </div>
-              <button
-                type="submit"
-                className={`w-100 py-3 rounded mt-4 ${styles.formBtn}`}
-              >
-                LOG IN
-              </button>
+              <Link href="/dashboard">
+                <button
+                  type="submit"
+                  className={`w-100 py-3 rounded mt-4 ${styles.formBtn}`}
+                >
+                  LOG IN
+                </button>
+              </Link>
             </form>
           </div>
         </main>
