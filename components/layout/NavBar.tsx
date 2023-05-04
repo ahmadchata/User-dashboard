@@ -14,6 +14,7 @@ import {
   faUserEdit,
   faBriefcase,
   faChevronDown,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "/styles/Dashboard.module.scss";
 
@@ -119,6 +120,13 @@ const NavBar: React.FC = () => {
           <a className={`ps-4 ${styles.link}`}>
             <FontAwesomeIcon icon={faCog} className="me-3" />
             <span>Audit Logs</span>
+          </a>
+        </li>
+
+        <li className={`mt-5`}>
+          <a className={`ps-4 ${styles.link}`}>
+            <FontAwesomeIcon icon={faSignOutAlt} className="me-3" />
+            <span>Logout</span>
           </a>
         </li>
       </ul>
