@@ -1,6 +1,9 @@
 $color_1: #030749;
+$color_2: #545F7D;
+$color_3: #39cdcc;
 
 .table {
+	position: relative;
 	thead {
 		tr {
 			border: none;
@@ -12,6 +15,10 @@ $color_1: #030749;
 		}
 		border: none;
 		border-style: none !important;
+
+		.filterIcon{
+			cursor: pointer;
+		}
 	}
 	th {
 		color: $color_1;
@@ -24,3 +31,31 @@ $color_1: #030749;
 		font-size: 0.875rem;
 	}
 }
+
+.filter {
+	position: absolute;
+	top: 50px;
+	left: 10px;
+	z-index: 4;
+	label {
+		font-size: 13px;
+	}
+
+	input {
+		font-size: 11px;
+	}
+
+	.resetBtn {
+		border: 1px solid $color_2;
+		border-radius: 8px;
+	}
+
+	.filterBtn {
+		color: #fff;
+		border: none;
+		background-color: $color_3;
+		border-radius: 8px;
+	}
+}
+
+

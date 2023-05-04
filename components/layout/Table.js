@@ -1,3 +1,4 @@
+import {useState} from "react";
 import PropTypes from "prop-types";
 import {
   useTable,
@@ -12,11 +13,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const DataTable = (props) => {
+  const [filter, setFilter] = useState(false);
+
+   // Open filter menu
+   const openFilter = () => {
+    setFilter((prev) => !prev);
+  };
+
   const instance = useTable(
     props,
     useFilters,
     useGroupBy,
-    useSortBy,
+    // useSortBy,
     useExpanded,
     usePagination
   );
@@ -25,7 +33,6 @@ const DataTable = (props) => {
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    pageOptions,
     page,
     state: { pageIndex, pageSize },
     previousPage,
@@ -37,18 +44,40 @@ const DataTable = (props) => {
   return (
     <>
       <table {...getTableProps()} className={`table shadow-sm ${styles.table}`}>
+        {filter && <div className={`p-4 bg-white shadow-sm sticky-top ${styles.filter}`}><form>
+          <div className="form-group">
+            <label>Organization</label>
+            <input type="text" className="form-control" placeholder="Organization" />
+          </div>
+          <div className="form-group">
+            <label>Username</label>
+            <input type="text" className="form-control" placeholder="Username" />
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input type="text" className="form-control" placeholder="Email" />
+          </div>
+          <div className="form-group">
+            <label>Phone Number</label>
+            <input type="text" className="form-control" placeholder="Phone Number" />
+          </div>
+          </form>
+          <div className="d-flex justify-content-center mt-3">
+          <button className={`px-3 me-4 ${styles.resetBtn}`}>Reset</button>
+          <button className={`px-3 ${styles.filterBtn}`}>Filter</button></div>
+          </div>}
         <thead>
           {headerGroups.map((headerGroup, i) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={i}>
               {headerGroup.headers.map((column, i) => (
                 <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  {...column.getHeaderProps()}
                   key={i}
                   className="px-4 py-2"
                 >
                   {column.render("Header")}
                   <span className="ms-2">
-                    <FontAwesomeIcon icon={faFilter} />
+                    <FontAwesomeIcon className={styles.filterIcon} icon={faFilter} onClick={openFilter} />
                   </span>
                 </th>
               ))}
