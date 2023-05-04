@@ -43,44 +43,48 @@ $background-color_1: #39cdcc;
 	font-weight: 700;
 	height: 60px;
 	width: 100%;
-}
-.searchBar {
-	background: #fff;
-	color: $color_4;
-	border-radius: 8px;
-	border: 1px solid #213f7d33;
-	&:hover {
-		border: 1px solid #2f12ad;
-		border-radius: 10px;
-	}
-	&:focus {
-		border: 1px solid #2f12ad;
-		border-radius: 10px;
-	}
-	input {
-		background: transparent;
-		border: none;
-		outline: none;
+	.searchBar {
+		background: #fff;
 		color: $color_4;
-		&::placeholder {
+		border-radius: 8px;
+		border: 1px solid #213f7d33;
+		&:hover {
+			border: 1px solid #2f12ad;
+			border-radius: 10px;
+		}
+		&:focus {
+			border: 1px solid #2f12ad;
+			border-radius: 10px;
+		}
+		input {
+			background: transparent;
+			border: none;
+			outline: none;
 			color: $color_4;
-			font-weight: 500;
-			font-size: 12px;
+			&::placeholder {
+				color: $color_4;
+				font-weight: 500;
+				font-size: 12px;
+			}
+		}
+		.glassBg {
+			background-color: $background-color_1;
+			border-top-right-radius: 8px;
+			border-bottom-right-radius: 8px;
 		}
 	}
+
+	.switch {
+		color: $color_1;
+		font-weight: 500;
+		font-size: 0.875rem;
+		.icons {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+	}
+	
 }
-.glassBg {
-	background-color: $background-color_1;
-	border-top-right-radius: 8px;
-	border-bottom-right-radius: 8px;
-}
-.switch {
-	color: $color_1;
-	font-weight: 500;
-	font-size: 0.875rem;
-}
-.icons {
-	width: 2.5rem;
-	height: 2.5rem;
-}
+
+
 /* TopBar - end */
