@@ -1,8 +1,7 @@
-import { useMemo, useEffect, useState, useCallback } from "react";
+import { useMemo, useEffect, useState, useCallback, useRef } from "react";
 import styles from "/styles/Users.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faClose,
   faCoins,
   faEllipsisVertical,
   faEye,
@@ -47,6 +46,7 @@ const Users: React.FC = () => {
     id: "",
     showMenu: false,
   });
+  const detailsRef = useRef<HTMLUListElement>(null);
 
   // Get Users
   const getUsers = useCallback(async () => {
@@ -73,6 +73,25 @@ const Users: React.FC = () => {
     getUsers();
   }, [getUsers]);
 
+  // Close details menu on click outside
+  useEffect(() => {
+    const handler = (event: any) => {
+      if (!detailsRef.current) {
+        return;
+      }
+      if (!detailsRef.current.contains(event.target)) {
+        setPosition((prev) => ({
+          ...prev,
+          showMenu: false,
+        }));
+      }
+    };
+    document.addEventListener("click", handler, true);
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, []);
+
   // Open details menu
   const openOptions = useCallback((e: React.MouseEvent, id: string) => {
     e.preventDefault();
@@ -82,14 +101,6 @@ const Users: React.FC = () => {
       id: id,
       showMenu: true,
     });
-  }, []);
-
-  // Close details menu
-  const closeMenu = useCallback(() => {
-    setPosition((prev) => ({
-      ...prev,
-      showMenu: false,
-    }));
   }, []);
 
   const cards = useMemo<Card[]>(
@@ -221,24 +232,13 @@ const Users: React.FC = () => {
 
       {position.showMenu ? (
         <ul
+          ref={detailsRef}
           style={{
             top: position.yPos,
             left: `calc(${position.xPos} - 150px)`,
           }}
           className={`shadow-sm ${styles.detailsCard}`}
         >
-          <FontAwesomeIcon
-            onClick={closeMenu}
-            icon={faClose}
-            className="me-2"
-            color="#545f7d"
-            style={{
-              position: "absolute",
-              cursor: "pointer",
-              top: "8px",
-              left: "8px",
-            }}
-          />
           <Link
             href={{
               pathname: "users/[id]",
