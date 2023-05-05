@@ -111,7 +111,7 @@ const Users: React.FC = () => {
         color: "#DF18FF",
         background: "#f9e9fd",
         icon: faUser,
-        numbers: "2,453",
+        numbers: users?.length.toString() || "0",
       },
       {
         id: 2,
@@ -119,7 +119,7 @@ const Users: React.FC = () => {
         color: "#5718FF",
         background: "#ede8fd",
         icon: faUsers,
-        numbers: "2,453",
+        numbers: "100",
       },
       {
         id: 3,
@@ -196,7 +196,6 @@ const Users: React.FC = () => {
     ],
     [openOptions]
   );
-
   const data = useMemo(() => users, [users]);
 
   return (
@@ -223,7 +222,7 @@ const Users: React.FC = () => {
           </div>
         ))}
       </div>
-      {loading ? <p>Loading...</p> : null}
+      {loading ? <p>Fetching data...</p> : null}
       {error ? (
         <p>Something went wrong, Please check your network</p>
       ) : (
