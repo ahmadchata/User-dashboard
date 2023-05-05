@@ -111,7 +111,7 @@ const Users: React.FC = () => {
         color: "#DF18FF",
         background: "#f9e9fd",
         icon: faUser,
-        numbers: users?.length.toString() || "0",
+        numbers: "100",
       },
       {
         id: 2,
