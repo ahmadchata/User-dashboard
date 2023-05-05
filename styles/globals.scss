@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  height: calc(100vh - 132px);
+}
+
+.green {
+  color: #39cdcc;
+}
+
+.navbar {
+  flex: 2;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.navbar::-webkit-scrollbar {
+  display: none;
+}
+
+.content {
+  flex: 10;
+  height: 100vh;
+  background-color: pink;
+  overflow-y: scroll;
+}

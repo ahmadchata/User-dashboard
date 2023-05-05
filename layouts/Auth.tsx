@@ -13,17 +13,18 @@ const Auth = ({ children, pageTitle = "" }: Props) => {
       <Head>
         <title>Lendsqr Dashboard | {pageTitle}</title>
       </Head>
-      <section className={`d-flex`}>
-        <NavBar />
-
-        <main className={`col-10`}>
-          <div className="sticky-top mt-3">
+      <main className={`d-flex`}>
+        <div className="navbar">
+          <NavBar />
+        </div>
+        <div className="content">
+          <div className="sticky-top">
             <TopBar />
           </div>
 
           {children}
-        </main>
-      </section>
+        </div>
+      </main>
     </>
   );
 };
