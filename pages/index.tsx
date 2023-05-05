@@ -6,9 +6,21 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import styles from "../styles/Home.module.scss";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { withSessionSsr } from "@/lib/withSession";
 
-export default function Home() {
+interface User {
+  email: string;
+  password: string;
+}
+
+const Home: React.FC = () => {
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [login, setLogin] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<boolean>(false);
 
   const togglePasswordShow = (e: React.MouseEvent<HTMLButtonElement>) => {
     let password = document.querySelector("#password") as HTMLInputElement;
@@ -44,7 +56,22 @@ export default function Home() {
   });
 
   // Submit form for signing in
-  const onSubmit = async (data: FormValues) => {};
+  const onSubmit = async (data: FormValues) => {
+    setLoginError(false);
+    setLogin(true);
+    try {
+      const response = await axios.post<User>(`/api/session`, {
+        email: data.email,
+        password: data.password,
+      });
+      if (response.status === 200) {
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      setLoginError(true);
+      setLogin(false);
+    }
+  };
 
   return (
     <>
@@ -118,6 +145,13 @@ export default function Home() {
                   </div>
                 )}
               </div>
+
+              {loginError && (
+                <div className="mt-3 text-danger">Invalid login details</div>
+              )}
+
+              {login && <div className="mt-3 text-success">Signing in...</div>}
+
               <div className="mt-3">
                 <Link
                   href="/"
@@ -131,18 +165,19 @@ export default function Home() {
                   FORGOT PASSWORD?
                 </Link>
               </div>
-              <Link href="/dashboard">
-                <button
-                  type="submit"
-                  className={`w-100 py-3 rounded mt-4 ${styles.formBtn}`}
-                >
-                  LOG IN
-                </button>
-              </Link>
+
+              <button
+                type="submit"
+                className={`w-100 py-3 rounded mt-4 ${styles.formBtn}`}
+              >
+                LOG IN
+              </button>
             </form>
           </div>
         </main>
       </div>
     </>
   );
-}
+};
+
+export default Home;

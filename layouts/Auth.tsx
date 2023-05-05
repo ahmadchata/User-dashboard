@@ -1,13 +1,15 @@
 import Head from "next/head";
 import NavBar from "../components/layout/NavBar";
 import TopBar from "../components/layout/TopBar";
+import { useRouter } from "next/router";
 
 interface Props {
   children: React.ReactNode;
   pageTitle?: string;
 }
 
-const Auth = ({ children, pageTitle = "" }: Props) => {
+const Auth = ({ children, pageTitle }: Props) => {
+  const router = useRouter();
   return (
     <>
       <Head>
