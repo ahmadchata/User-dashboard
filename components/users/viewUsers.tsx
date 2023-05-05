@@ -1,8 +1,7 @@
-import { useMemo, useEffect, useState, useCallback } from "react";
+import { useMemo, useEffect, useState, useCallback, useRef } from "react";
 import styles from "/styles/Users.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faClose,
   faCoins,
   faEllipsisVertical,
   faEye,
@@ -35,6 +34,7 @@ type Card = {
 const Users: React.FC = () => {
   const [users, setUsers] = useState<User[]>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
   const [position, setPosition] = useState<{
     xPos: string;
     yPos: string;
@@ -46,19 +46,25 @@ const Users: React.FC = () => {
     id: "",
     showMenu: false,
   });
+  const detailsRef = useRef<HTMLUListElement>(null);
 
   // Get Users
   const getUsers = useCallback(async () => {
     setLoading(true);
+    setError(false);
     try {
       const response = await axios.get<User[]>(
-        "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users"
+        "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users",
+        {
+          timeout: 15000, // Add 15 seconds timeout
+        }
       );
       if (response.status === 200) {
         setUsers(response.data);
       }
     } catch (error) {
-      console.error(error);
+      setError(true);
+      // console.error(error);
     }
     setLoading(false);
   }, []);
@@ -66,6 +72,25 @@ const Users: React.FC = () => {
   useEffect(() => {
     getUsers();
   }, [getUsers]);
+
+  // Close details menu on click outside
+  useEffect(() => {
+    const handler = (event: any) => {
+      if (!detailsRef.current) {
+        return;
+      }
+      if (!detailsRef.current.contains(event.target)) {
+        setPosition((prev) => ({
+          ...prev,
+          showMenu: false,
+        }));
+      }
+    };
+    document.addEventListener("click", handler, true);
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, []);
 
   // Open details menu
   const openOptions = useCallback((e: React.MouseEvent, id: string) => {
@@ -76,14 +101,6 @@ const Users: React.FC = () => {
       id: id,
       showMenu: true,
     });
-  }, []);
-
-  // Close details menu
-  const closeMenu = useCallback(() => {
-    setPosition((prev) => ({
-      ...prev,
-      showMenu: false,
-    }));
   }, []);
 
   const cards = useMemo<Card[]>(
@@ -206,28 +223,22 @@ const Users: React.FC = () => {
           </div>
         ))}
       </div>
-      {loading ? <p>Loading...</p> : <Table columns={columns} data={data} />}
+      {loading ? <p>Loading...</p> : null}
+      {error ? (
+        <p>Something went wrong, Please check your network</p>
+      ) : (
+        <Table columns={columns} data={data} />
+      )}
 
       {position.showMenu ? (
         <ul
+          ref={detailsRef}
           style={{
             top: position.yPos,
             left: `calc(${position.xPos} - 150px)`,
           }}
           className={`shadow-sm ${styles.detailsCard}`}
         >
-          <FontAwesomeIcon
-            onClick={closeMenu}
-            icon={faClose}
-            className="me-2"
-            color="#545f7d"
-            style={{
-              position: "absolute",
-              cursor: "pointer",
-              top: "8px",
-              left: "8px",
-            }}
-          />
           <Link
             href={{
               pathname: "users/[id]",
