@@ -17,12 +17,24 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "/styles/Dashboard.module.scss";
+import axios from "axios";
 
 const NavBar: React.FC = () => {
   const router = useRouter();
 
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(`/api/logout`);
+      if (response.status === 200) {
+        router.push("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <nav className={`py-5 bg-white ${styles.nav}`}>
+    <nav className={`py-4 bg-white ${styles.nav}`}>
       <div className={`d-flex justify-content-start ps-4`}>
         <Image src="/assets/logo.png" width={145} height={30} alt="logo" />
       </div>
@@ -123,7 +135,7 @@ const NavBar: React.FC = () => {
           </a>
         </li>
 
-        <li className={`mt-5`}>
+        <li className={`mt-5`} onClick={handleLogout}>
           <a className={`ps-4 ${styles.link}`}>
             <FontAwesomeIcon icon={faSignOutAlt} className="me-3" />
             <span>Logout</span>

@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import Auth from "../../../layouts/Auth";
 import Details from "../../../components/users/userDetails";
 import axios from "axios";
+import { withSessionSsr } from "@/lib/withSession";
 
 interface Profile {
   firstName: string;
@@ -110,5 +111,22 @@ const UserDetails: React.FC = () => {
     </Auth>
   );
 };
+
+export const getServerSideProps = withSessionSsr(async function ({ req }) {
+  const user = req.session.user;
+
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { user: req.session.user },
+  };
+});
 
 export default UserDetails;
