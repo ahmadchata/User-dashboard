@@ -1,24 +1,15 @@
 import Auth from "../../layouts/Auth";
 import { withSessionSsr } from "@/lib/withSession";
 
-declare module "iron-session" {
-  interface IronSessionData {
-    user?: {
-      username: string;
-      isAdmin?: boolean;
-    };
-  }
-}
-
 const Dashboard: React.FC = () => {
   return (
-    <Auth pageTitle="Overview">
+    <Auth pageTitle="">
       <div className="mt-2 ps-5">Dashboard</div>
     </Auth>
   );
 };
 
-export const getServerSideProps = withSessionSsr(async function ({ req, res }) {
+export const getServerSideProps = withSessionSsr(async function ({ req }) {
   const user = req.session.user;
 
   if (!user) {

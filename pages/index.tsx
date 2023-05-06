@@ -11,11 +11,15 @@ import { useRouter } from "next/router";
 import { withSessionSsr } from "@/lib/withSession";
 
 interface User {
-  email: string;
-  password: string;
+  username: string;
+  isAdmin: boolean;
 }
 
-const Home: React.FC = () => {
+interface Props {
+  user: User;
+}
+
+const Home: React.FC<Props> = ({ user }) => {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -94,90 +98,118 @@ const Home: React.FC = () => {
               alt="logo"
             />
           </div>
-          <div
-            className={`col px-5 d-flex flex-column ${styles.bg} justify-content-center`}
-          >
-            <h1 className={styles.title}>Welcome!</h1>
-            <small className={styles.details}>Enter details to login</small>
-            <form onSubmit={handleSubmit(onSubmit)} className={`mt-5`}>
-              <div className={`${styles.formGroup} mb-4`}>
-                <div
-                  className={`${styles.inputGroup} form-control ${
-                    errors.email ? "is-invalid" : ""
-                  }`}
-                >
-                  <input
-                    type="email"
-                    {...register("email")}
-                    placeholder="Email"
-                  />
-                </div>
-                {errors?.email && (
-                  <div className="invalid-feedback bg-white">
-                    {errors.email.message}
-                  </div>
-                )}
-              </div>
-              <div className={`${styles.formGroup}`}>
-                <div
-                  className={`${
-                    styles.inputGroup
-                  } d-flex justify-content-between form-control ${
-                    errors.password ? "is-invalid" : ""
-                  }`}
-                >
-                  <input
-                    placeholder="Password"
-                    type="password"
-                    {...register("password")}
-                    id={`password`}
-                  />
-                  <button
-                    onClick={togglePasswordShow}
-                    className="green btn fw-bold"
-                  >
-                    {showPassword ? "HIDE" : "SHOW"}
-                  </button>
-                </div>
-                {errors?.password && (
-                  <div className="invalid-feedback bg-white">
-                    {errors.password.message}
-                  </div>
-                )}
-              </div>
-
-              {loginError && (
-                <div className="mt-3 text-danger">Invalid login details</div>
-              )}
-
-              {login && <div className="mt-3 text-success">Signing in...</div>}
-
-              <div className="mt-3">
-                <Link
-                  href="/"
-                  style={{
-                    fontSize: "0.75rem",
-                    fontWeight: 500,
-                    color: "#39cdcc",
-                    textDecoration: "none",
-                  }}
-                >
-                  FORGOT PASSWORD?
-                </Link>
-              </div>
-
+          {user.isAdmin ? (
+            <div
+              className={`col px-5 d-flex flex-column ${styles.bg} text-center justify-content-center`}
+            >
+              Logged in as {user.username}
               <button
-                type="submit"
-                className={`w-100 py-3 rounded mt-4 ${styles.formBtn}`}
+                className="btn btn-success mt-4"
+                onClick={() => router.push("/dashboard")}
               >
-                LOG IN
+                Continue to dashboard
               </button>
-            </form>
-          </div>
+            </div>
+          ) : (
+            <div
+              className={`col px-5 d-flex flex-column ${styles.bg} justify-content-center`}
+            >
+              <h1 className={styles.title}>Welcome!</h1>
+              <small className={styles.details}>Enter details to login</small>
+              <form onSubmit={handleSubmit(onSubmit)} className={`mt-5`}>
+                <div className={`${styles.formGroup} mb-4`}>
+                  <div
+                    className={`${styles.inputGroup} form-control ${
+                      errors.email ? "is-invalid" : ""
+                    }`}
+                  >
+                    <input
+                      type="email"
+                      {...register("email")}
+                      placeholder="Email"
+                    />
+                  </div>
+                  {errors?.email && (
+                    <div className="invalid-feedback bg-white">
+                      {errors.email.message}
+                    </div>
+                  )}
+                </div>
+                <div className={`${styles.formGroup}`}>
+                  <div
+                    className={`${
+                      styles.inputGroup
+                    } d-flex justify-content-between form-control ${
+                      errors.password ? "is-invalid" : ""
+                    }`}
+                  >
+                    <input
+                      placeholder="Password"
+                      type="password"
+                      {...register("password")}
+                      id={`password`}
+                    />
+                    <button
+                      onClick={togglePasswordShow}
+                      className="green btn fw-bold"
+                    >
+                      {showPassword ? "HIDE" : "SHOW"}
+                    </button>
+                  </div>
+                  {errors?.password && (
+                    <div className="invalid-feedback bg-white">
+                      {errors.password.message}
+                    </div>
+                  )}
+                </div>
+
+                {loginError && (
+                  <div className="mt-3 text-danger">Invalid login details</div>
+                )}
+
+                {login && (
+                  <div className="mt-3 text-success">Signing in...</div>
+                )}
+
+                <div className="mt-3">
+                  <Link
+                    href="/"
+                    style={{
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      color: "#39cdcc",
+                      textDecoration: "none",
+                    }}
+                  >
+                    FORGOT PASSWORD?
+                  </Link>
+                </div>
+
+                <button
+                  type="submit"
+                  className={`w-100 py-3 rounded mt-4 ${styles.formBtn}`}
+                >
+                  LOG IN
+                </button>
+              </form>
+            </div>
+          )}
         </main>
       </div>
     </>
   );
 };
+
+export const getServerSideProps = withSessionSsr(async function ({ req }) {
+  const user = req.session.user;
+
+  if (!user) {
+    return { props: { user: { username: "", isAdmin: false } } };
+  }
+
+  return {
+    props: { user: req.session.user },
+  };
+});
 
 export default Home;

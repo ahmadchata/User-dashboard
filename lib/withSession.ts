@@ -6,6 +6,16 @@ import {
   NextApiHandler,
 } from "next";
 
+declare module "iron-session" {
+  interface IronSessionData {
+    get(name: string): any;
+    user?: {
+      username: string;
+      isAdmin?: boolean;
+    };
+  }
+}
+
 export function withSessionRoute(handler: NextApiHandler) {
   return withIronSessionApiRoute(handler, sessionOptions);
 }

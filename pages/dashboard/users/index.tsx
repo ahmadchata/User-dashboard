@@ -13,7 +13,7 @@ const Users = (): JSX.Element => {
   );
 };
 
-export const getServerSideProps = withSessionSsr(async function ({ req, res }) {
+export const getServerSideProps = withSessionSsr(async function ({ req }) {
   const user = req.session.user;
 
   if (!user) {
