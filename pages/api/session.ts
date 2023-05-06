@@ -6,7 +6,7 @@ const VALID_PASSWORD = "password";
 
 export default withSessionRoute(createSessionRoute);
 
-async function createSessionRoute(req: NextApiRequest, res: NextApiResponse) {
+async function createSessionRoute(req: any, res: any) {
   if (req.method === "POST") {
     const { email, password } = req.body;
 
