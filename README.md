@@ -6,6 +6,11 @@
 
 - [Dashboard](https://ahmad-chata-lendsqr-fe-test.vercel.app)
 
+### Login details
+
+- Email: `test@gmail.com`
+- Password: `password`
+
 ## 🔧 Built with
 
 - TypeScript
@@ -39,4 +44,4 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Click "LOGIN" to go to the Dashboard.
+Use the login details above to login.
