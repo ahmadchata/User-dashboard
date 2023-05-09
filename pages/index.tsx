@@ -166,11 +166,6 @@ const Home: React.FC<Props> = ({ user }) => {
                 {loginError && (
                   <div className="mt-3 text-danger">Invalid login details</div>
                 )}
-
-                {login && (
-                  <div className="mt-3 text-success">Signing in...</div>
-                )}
-
                 <div className="mt-3">
                   <Link
                     href="/"
@@ -186,10 +181,11 @@ const Home: React.FC<Props> = ({ user }) => {
                 </div>
 
                 <button
+                  disabled={login}
                   type="submit"
                   className={`w-100 py-3 rounded mt-4 ${styles.formBtn}`}
                 >
-                  LOG IN
+                  {login ? "Signing in..." : "LOG IN"}
                 </button>
               </form>
             </div>
