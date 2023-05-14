@@ -81,7 +81,7 @@ const Home: React.FC<Props> = ({ user }) => {
     <>
       <Head>
         <title>Dashboard | Login</title>
-        <meta name="description" content="Lendsqr Dashboard Login" />
+        <meta name="description" content="Dashboard Login" />
       </Head>
       <nav className="p-4">
         <Image src="/assets/logo.png" width={174} height={36} alt="logo" />
