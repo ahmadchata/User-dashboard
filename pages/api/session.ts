@@ -17,6 +17,8 @@ async function createSessionRoute(req: NextApiRequest, res: NextApiResponse) {
       };
       await req.session.save();
       res.send({ ok: true });
+    } else {
+      res.status(401).send({ ok: false });
     }
   }
 }
