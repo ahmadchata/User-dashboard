@@ -12,8 +12,6 @@ import {
   faHandshake,
   faMoneyBill1Wave,
   faUserEdit,
-  faBriefcase,
-  faChevronDown,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "/styles/Dashboard.module.scss";

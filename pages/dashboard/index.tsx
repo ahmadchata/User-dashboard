@@ -3,7 +3,7 @@ import { withSessionSsr } from "@/lib/withSession";
 
 const Dashboard: React.FC = () => {
   return (
-    <Auth pageTitle="">
+    <Auth pageTitle="Home">
       <div className="mt-2 ps-5">Dashboard</div>
     </Auth>
   );
