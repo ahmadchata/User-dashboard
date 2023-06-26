@@ -12,8 +12,6 @@ import {
   faHandshake,
   faMoneyBill1Wave,
   faUserEdit,
-  faBriefcase,
-  faChevronDown,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "/styles/Dashboard.module.scss";
@@ -36,16 +34,9 @@ const NavBar: React.FC = () => {
   return (
     <nav className={`py-4 bg-white ${styles.nav}`}>
       <div className={`d-flex justify-content-start ps-4`}>
-        <Image src="/assets/logo.png" width={145} height={30} alt="logo" />
+        <Image src="/assets/d-logo.png" width={176} height={62} alt="logo" />
       </div>
       <ul className="list-unstyled mt-5">
-        <li className={`mb-5`}>
-          <a className={`ps-4 ${styles.link}`}>
-            <FontAwesomeIcon icon={faBriefcase} className="me-3" />
-            <span className="me-2">Switch Organization</span>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </a>
-        </li>
         <li
           className={`mb-2 ${
             router.pathname === "/dashboard" && `${styles.selected}`

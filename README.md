@@ -1,6 +1,6 @@
 ## Project Description
 
-> This is a dashboard designed as a test for Lendsqr
+> This is a dashboard designed as a boiler plate
 
 ## Live Demo
 
@@ -26,9 +26,9 @@
 
 ### Steps to follow
 
-1. Clone the repository to your local machine using `git clone git@github.com:ahmadchata/lendsqr-fe-test.git`
+1. Clone the repository to your local machine using `git clone git@github.com:ahmadchata/user-dashboard.git`
 
-2. On your local machine, navigate to the lendsqr-fe-test folder using `cd lendsqr-fe-test` on your terminal
+2. On your local machine, navigate to the lendsqr-fe-test folder using `cd user-dashboard` on your terminal
 
 3. Run `npm install` to install all the necessary dependencies.
 

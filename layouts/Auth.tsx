@@ -13,10 +13,10 @@ const Auth = ({ children, pageTitle }: Props) => {
   return (
     <>
       <Head>
-        <title>Lendsqr Dashboard | {pageTitle}</title>
+        <title>Dashboard | {pageTitle}</title>
       </Head>
       <main className={`d-flex`}>
-        <div className="navbar">
+        <div className="d-none d-lg-block navbar">
           <NavBar />
         </div>
         <div className="content">

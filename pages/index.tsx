@@ -84,18 +84,23 @@ const Home: React.FC<Props> = ({ user }) => {
         <meta name="description" content="Dashboard Login" />
       </Head>
       <nav className="p-4">
-        <Image src="/assets/logo.png" width={174} height={36} alt="logo" />
+        <Image
+          src="/assets/d-logo.png"
+          width={176}
+          height={62}
+          alt="Dashboard logo"
+        />
       </nav>
-      <div className={`wrapper`}>
+      <div className={`wrapper px-2 px-lg-5`}>
         <main className={`row mx-0`}>
           <div
-            className={`${styles.bg} d-none d-lg-flex col-7 justify-content-center align-items-center`}
+            className={`${styles.bg} d-none d-lg-flex col-6 justify-content-center align-items-center`}
           >
             <Image
-              src="/assets/bg/sign-in.png"
-              width={600}
-              height={338}
-              alt="logo"
+              src="/assets/bg/login-image.png"
+              width={512}
+              height={512}
+              alt="Login logo"
             />
           </div>
           {user.isAdmin ? (
