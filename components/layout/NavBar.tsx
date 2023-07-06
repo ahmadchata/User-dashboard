@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -18,9 +19,11 @@ import styles from "/styles/Dashboard.module.scss";
 import axios from "axios";
 
 const NavBar: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogout = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(`/api/logout`);
       if (response.status === 200) {
@@ -29,6 +32,7 @@ const NavBar: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   return (
@@ -129,7 +133,7 @@ const NavBar: React.FC = () => {
         <li className={`mt-5`} onClick={handleLogout}>
           <a className={`ps-4 ${styles.link}`}>
             <FontAwesomeIcon icon={faSignOutAlt} className="me-3" />
-            <span>Logout</span>
+            <span>{loading ? "logging out" : "Logout"}</span>
           </a>
         </li>
       </ul>
