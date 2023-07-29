@@ -1,12 +1,20 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-const BasicInfo = ({ user, walletBalance }) => {
+type BasicInfoProps = {
+  user: {
+    username: string;
+    email: string;
+  };
+  walletBalance: string;
+};
+
+const BasicInfo = ({ user, walletBalance }: BasicInfoProps): JSX.Element => {
   return (
     <Wrap>
       <div className="me">
         <Image
-          src={`/peoples/person2.png`}
+          src={`/assets/avatar.jpg`}
           alt="User image"
           width={54}
           height={54}
