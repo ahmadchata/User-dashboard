@@ -4,7 +4,7 @@ import { withSessionSsr } from "@/lib/withSession";
 const Dashboard: React.FC = () => {
   return (
     <Auth pageTitle="Home">
-      <div className="mt-2 ps-5">Dashboard</div>
+      <div className="mt-2 ps-5"></div>
     </Auth>
   );
 };
