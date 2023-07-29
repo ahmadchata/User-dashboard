@@ -3,19 +3,24 @@ import { withSessionSsr } from "@/lib/withSession";
 import BasicInfo from "@/components/dashboard/BasicInfo";
 import DashboardMain from "@/components/dashboard/DashboardMain";
 
-const Dashboard: React.FC = () => {
-  const user = {
-    username: "Ahmad",
-    email: "ahmadchata@gmail.com",
-  };
+interface User {
+  username: string;
+  isAdmin: boolean;
+  email: string;
+}
 
+interface Props {
+  user: User;
+}
+
+const Dashboard: React.FC<Props> = ({ user }) => {
   const uWallet = {
-    walletAccountBalance: "00",
-    account_number: "0000000000",
+    walletAccountBalance: "100000",
+    account_number: "50700000",
   };
   return (
     <Auth pageTitle="Home">
-      <div className="mt-2 ps-5">
+      <div className="mt-2 px-lg-5">
         <BasicInfo
           user={user}
           walletBalance={uWallet?.walletAccountBalance ?? "00"}
