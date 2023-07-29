@@ -1,6 +1,7 @@
 import Auth from "../../layouts/Auth";
 import { withSessionSsr } from "@/lib/withSession";
 import BasicInfo from "@/components/dashboard/BasicInfo";
+import DashboardMain from "@/components/dashboard/DashboardMain";
 
 const Dashboard: React.FC = () => {
   const user = {
@@ -10,6 +11,7 @@ const Dashboard: React.FC = () => {
 
   const uWallet = {
     walletAccountBalance: "00",
+    account_number: "0000000000",
   };
   return (
     <Auth pageTitle="Home">
@@ -18,6 +20,7 @@ const Dashboard: React.FC = () => {
           user={user}
           walletBalance={uWallet?.walletAccountBalance ?? "00"}
         />
+        <DashboardMain wallet={uWallet} />
       </div>
     </Auth>
   );

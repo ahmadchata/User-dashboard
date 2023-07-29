@@ -14,20 +14,29 @@ import {
 } from "recharts";
 import { IoPaperPlane } from "react-icons/io5";
 
-const DashboardMain = ({ toggleTransfer, wallet }) => {
+export interface Wallet {
+  walletAccountBalance: string;
+  account_number: string;
+}
+
+interface DashboardMainProps {
+  wallet: Wallet;
+}
+
+const DashboardMain = ({ wallet }: DashboardMainProps) => {
   const data = [
     { name: "Product A", value: 500 },
     { name: "Product B", value: 800 },
     { name: "Product C", value: 600 },
     { name: "Product D", value: 500 },
   ];
-  const COLORS = ["#100329", "#0066FF", "#C4C4C4", "#FCB500"];
+  const COLORS = ["#100329", "#39cdcc", "#C4C4C4", "#FCB500"];
 
   const data2 = [
     { name: "Active", value: 500 },
     { name: "Not Active", value: 800 },
   ];
-  const COLORS2 = ["#0099FF36", "#0066FF"];
+  const COLORS2 = ["#0099FF36", "#39cdcc"];
 
   const data3 = [
     {
@@ -74,25 +83,21 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
     },
   ];
 
-  const InsuranceProduct = () => {
+  const NonActiveProduct = () => {
     return (
       <div className="insurance-product">
-        <h2>Insurance Product</h2>
+        <h2>Non Active Product</h2>
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart
-          // width={250} height={400}
-          >
+          <PieChart>
             <Pie
               data={data}
-              // cx={120}
-              // cy={200}
               innerRadius={65}
               outerRadius={80}
               fill="#8884d8"
               paddingAngle={-20}
               dataKey="value"
               cornerRadius={10}
-              stroke={false}
+              stroke="false"
             >
               {data.map((entry, index) => (
                 <Cell
@@ -112,20 +117,16 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
       <div className="active-product">
         <h2>Active Product</h2>
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart
-          // width={250} height={400}
-          >
+          <PieChart>
             <Pie
               data={data2}
-              // cx={120}
-              // cy={200}
               innerRadius={65}
               outerRadius={80}
               fill="#8884d8"
               paddingAngle={-20}
               dataKey="value"
               cornerRadius={10}
-              stroke={false}
+              stroke="false"
             >
               {data2.map((entry, index) => (
                 <Cell
@@ -147,16 +148,7 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             className="bar-chart"
-            // width={500}
-            // height={300}
             data={data3}
-            // margin={{
-            //   top: 5,
-            //   right: 30,
-            //   left: 20,
-            //   bottom: 5,
-            // }}
-            cornerRadius={100}
             innerRadius={50}
             outerRadius={30}
             barSize={15}
@@ -169,13 +161,13 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
             <Legend />
             <Bar
               dataKey="pv"
-              name="Maleria Care Plan"
-              fill="#0066FF"
+              name="Product A"
+              fill="#39cdcc"
               radius={[10, 10, 0, 0]}
             />
             <Bar
               dataKey="uv"
-              name="Credit Life Care Plan"
+              name="Product B"
               fill="#FCB500"
               radius={[10, 10, 0, 0]}
             />
@@ -185,7 +177,11 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
     );
   };
 
-  const CreditCardWallet = ({ walletNumber }) => {
+  interface CreditCardWalletProps {
+    walletNumber: string;
+  }
+
+  const CreditCardWallet = ({ walletNumber }: CreditCardWalletProps) => {
     return (
       <div className="credit-card-wallet">
         <p
@@ -218,8 +214,8 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
           <tbody>
             <tr>
               <td className="product-name">
-                <div className="m">M</div>
-                Maleria Care Plan
+                <div className="m">P</div>
+                Product 1
               </td>
               <td>147</td>
               <td>20</td>
@@ -228,8 +224,8 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
             </tr>
             <tr>
               <td className="product-name">
-                <div className="mp">M</div>
-                Maleria Care Plan Plus
+                <div className="mp">P</div>
+                Product 2
               </td>
               <td>81</td>
               <td>17</td>
@@ -238,7 +234,7 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
             </tr>
             <tr>
               <td className="product-name">
-                <div className="c">C</div>Credit Life Care Plan
+                <div className="c">P</div>Product 3
               </td>
               <td>-</td>
               <td>-</td>
@@ -254,7 +250,7 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
   return (
     <DashboardWrap>
       <DashboardChart>
-        <InsuranceProduct />
+        <NonActiveProduct />
         <ActiveProduct />
         <ProductActivities />
       </DashboardChart>
@@ -268,9 +264,7 @@ const DashboardMain = ({ toggleTransfer, wallet }) => {
               <IoPaperPlane />
             </div>
 
-            <button onClick={toggleTransfer} className="credit-card-box-btn">
-              Top up wallet
-            </button>
+            <button className="credit-card-box-btn">Top up wallet</button>
           </div>
         </div>
 
@@ -352,18 +346,17 @@ const DashboardData = styled.div`
     /* justify-content: flex-start; */
     padding: 0;
     .credit-card-wallet {
-      background-image: url("/images/creditCard.svg");
+      background-image: url("/assets/card.svg");
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
       width: 100%;
-      height: 170px;
+      height: 180px;
       overflow: hidden;
       position: relative;
       border-radius: 20px;
-      /* margin-bottom: 10px; */
       padding: 20px;
-      color: #fff;
+      color: #000;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -374,21 +367,20 @@ const DashboardData = styled.div`
       align-items: center;
       justify-content: space-between;
       padding: 10px;
-      /* background-color: #f8f7f8; */
       background-color: #ededed;
       border-radius: 10px;
       margin-top: 20px;
       .credit-card-box-icon {
-        color: #0066ff;
+        color: #39cdcc;
         font-size: 20px;
-        background-color: #0099ff36;
+        background-color: #5bf6f6b8;
         padding: 5px 20px;
         border-radius: 10px;
         cursor: pointer;
       }
 
       .credit-card-box-btn {
-        background-color: #0066ff;
+        background-color: #39cdcc;
         color: #fff;
         border-radius: 10px;
         padding: 10px 20px;
