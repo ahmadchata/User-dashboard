@@ -66,7 +66,7 @@ const NavBar: React.FC = () => {
             </a>
           </Link>
         </li>
-        <li className={`mb-2`}>
+        {/* <li className={`mb-2`}>
           <a className={`ps-4 ${styles.link}`}>
             <FontAwesomeIcon icon={faUsers} className="me-3" />
             <span>Guarantors</span>
@@ -128,7 +128,7 @@ const NavBar: React.FC = () => {
             <FontAwesomeIcon icon={faCog} className="me-3" />
             <span>Audit Logs</span>
           </a>
-        </li>
+        </li> */}
 
         <li className={`mt-5`} onClick={handleLogout}>
           <a className={`ps-4 ${styles.link}`}>

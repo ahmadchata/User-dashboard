@@ -11,6 +11,10 @@
 - Email: `test@gmail.com`
 - Password: `password`
 
+### Screenshot
+
+![screenshot](assets/screenshot.png)
+
 ## 🔧 Built with
 
 - TypeScript

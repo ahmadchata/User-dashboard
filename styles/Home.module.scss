@@ -5,73 +5,73 @@ $color_4: #1a0b4379;
 $color_5: white;
 
 .title {
-	color: $color_1;
-	font-weight: 700;
+  color: $color_1;
+  font-weight: 700;
 }
 .details {
-	color: $color_2;
-	font-size: 20px;
+  color: $color_2;
+  font-size: 20px;
 }
 .bg {
-	height: calc(100vh - 200px);
+  height: calc(100vh - 200px);
 }
 .formGroup {
-	input {
-		border: none;
-		height: 2rem;
-		width: 100%;
-		font-size: 0.938rem;
-		font-weight: 400;
-		color: $color_3;
-		padding: 0.3rem 1rem;
-		background: transparent;
-		&:focus {
-			outline: none !important;
-			box-shadow: none !important;
-		}
-		&:hover {
-			outline: none !important;
-			box-shadow: none !important;
-		}
-		&::placeholder {
-			font-size: 0.938rem;
-			font-weight: 400;
-			color: $color_4;
-		}
-	}
+  input {
+    border: none;
+    height: 2rem;
+    width: 100%;
+    font-size: 0.938rem;
+    font-weight: 400;
+    color: $color_3;
+    padding: 0.3rem 1rem;
+    background: transparent;
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    &:hover {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    &::placeholder {
+      font-size: 0.938rem;
+      font-weight: 400;
+      color: $color_4;
+    }
+  }
 }
 .inputGroup {
-	border: 2px solid rgba(84, 95, 125, 0.15);
-	border-radius: 5px;
-	button {
-		&:focus {
-			outline: none;
-			box-shadow: none;
-		}
-		&:focus-visible {
-			outline: none;
-			box-shadow: none;
-		}
-	}
+  border: 2px solid rgba(84, 95, 125, 0.15);
+  border-radius: 5px;
+  button {
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    &:focus-visible {
+      outline: none;
+      box-shadow: none;
+    }
+  }
 }
 .formBtn {
-	background: #39cdcc;
-	border: 0;
-	color: $color_5;
-	font-size: 18px;
-	font-weight: 700;
-	&:hover {
-		color: $color_5;
-	}
+  background: #39cdcc;
+  border: 0;
+  color: $color_5;
+  font-size: 18px;
+  font-weight: 700;
+  &:hover {
+    color: $color_5;
+  }
 }
 .formBtnOne {
-	background: #39cdcc;
-	border: 0;
-	color: $color_5;
-	font-size: 18px;
-	font-weight: 700;
-	margin-top: 1.5rem;
-	&:hover {
-		color: $color_5;
-	}
+  background: #39cdcc;
+  border: 0;
+  color: $color_5;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  &:hover {
+    color: $color_5;
+  }
 }
