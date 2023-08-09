@@ -15,12 +15,12 @@ interface Props {
 
 const Dashboard: React.FC<Props> = ({ user }) => {
   const uWallet = {
-    walletAccountBalance: "100000",
+    walletAccountBalance: "100,000",
     account_number: "50700000",
   };
   return (
     <Auth pageTitle="Home">
-      <div className="mt-2 px-lg-5">
+      <div className="mt-5 px-lg-5">
         <BasicInfo
           user={user}
           walletBalance={uWallet?.walletAccountBalance ?? "00"}
