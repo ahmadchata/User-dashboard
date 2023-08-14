@@ -13,7 +13,7 @@
 
 ### Screenshot
 
-![screenshot](assets/screenshot.png)
+![screenshot](/public/assets/screenshot.png)
 
 ## 🔧 Built with
 
